@@ -1,14 +1,15 @@
-function loadAllProducts() {
+function loadAllProducts(id) {
   url = "https://fakestoreapi.com/products";
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayCart(data));
+    .then((data) => displayCart(data.data));
 }
 
 const displayCart = (carts) => {
   const cart = document.getElementById("products");
   cart.innerHTML = "";
-  for (let cart of carts) {
+
+  carts.forEach((cart) => {
     const cartDiv = document.createElement("div");
     cartDiv.innerHTML = `
         <div class="relative bg-white rounded-xl shadow-sm p-8 pt-12">
@@ -22,6 +23,7 @@ const displayCart = (carts) => {
                 </p>
             </div>
         `;
-    cart.append(cartDiv);
-  }
+  });
+
+  cart.append(cartDiv);
 };
